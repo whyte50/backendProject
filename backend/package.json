@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whyte50/backendProject.git"
+  },
+  "keywords": [
+    "backend"
+  ],
+  "author": "emmanuel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/whyte50/backendProject/issues"
+  },
+  "homepage": "https://github.com/whyte50/backendProject#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.2",
+    "nodemon": "^2.0.15"
+  }
+}
