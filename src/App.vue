@@ -1,30 +1,33 @@
 <template>
-  <div id="nav">
+  <!-- <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-  </div>
+  </div> -->
+  
+  <Navlink />
   <router-view/>
 </template>
 
+<script>
+import Navlink from './components/pg/Navlink.vue'
+
+export default {
+  mounted(){
+    let externalScript = document.createElement('script')
+
+    externalScript.setAttribute('src', './assets/js/bootstrap.min.js')
+
+    document.head.appendChild(externalScript)
+  },
+  components: {
+    Navlink,
+  }
+}
+
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import './assets/fonts/font-awesome.min.css';
+@import './assets/fonts/ionicons.min.css';
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
