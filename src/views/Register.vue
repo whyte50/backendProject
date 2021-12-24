@@ -1,6 +1,5 @@
 <template>
 <div class="wrapper">
-  
   <div class="box-container">
     <div>
       <h1 style="font-size: 80px">REGIS</h1>
@@ -22,12 +21,12 @@
       </form>
     </div>
   </div>
-  <div class="wery"><img src="../assets/auth.svg"></div>
 </div>
 </template>
 
 <script>
 export default {
+  name: 'Register'
 
 }
 </script>

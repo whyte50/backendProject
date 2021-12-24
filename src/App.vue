@@ -12,13 +12,6 @@
 import Navlink from './components/pg/Navlink.vue'
 
 export default {
-  mounted(){
-    let externalScript = document.createElement('script')
-
-    externalScript.setAttribute('src', './assets/js/bootstrap.min.js')
-
-    document.head.appendChild(externalScript)
-  },
   components: {
     Navlink,
   }

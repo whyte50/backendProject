@@ -1,6 +1,6 @@
 <template>
   <div class="bg-helper">
-    <img class="bg" src="../assets/bg.svg">
+    <!-- <img class="bg" src="../assets/bg.svg"> -->
   </div>
   <Fintech />
 </template>
@@ -13,6 +13,6 @@ export default {
   name: 'Home',
   components : {
     Fintech
-  }
+  },
 }
 </script>

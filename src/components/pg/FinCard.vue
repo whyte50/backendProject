@@ -4,7 +4,7 @@
             <span class="card-type">VISA</span>
             <span class="card-number">1234&nbsp; 5678&nbsp; 9012&nbsp; 3456</span>
         </div>
-        <div class="edit-card" v-if="exit">
+        <div class="edit-card" v-if="exit" type="button">
         <i class="fa fa-minus"></i>
         </div>
     </div>

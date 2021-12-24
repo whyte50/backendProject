@@ -1,6 +1,6 @@
 <template>
   <div class="account-wrapper">
-        <div class="account">
+        <div class="account" style="margin-top: 0">
             <div class="amount-dispaly">
                 <span>₦5,000</span>
             </div>

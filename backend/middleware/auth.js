@@ -21,8 +21,10 @@ const verifyUser = (req, res, next) => {
         const decoded = branca.decode(token)
         req.user = decoded
 
+        console.log('success, you are verified')
+
     }catch (e) {
-        console.log(e)
+        // console.log(e)
     }
     return next()
 }
