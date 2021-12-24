@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors')
 const cookieParser = require('cookie-parser');
 
 require('./config/db')
@@ -14,6 +15,7 @@ app.set('views', pathToViews)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
 app.use(cookieParser())
+app.use(cors())
 app.use(ROUTER)
 
 app.get('/', (req, res) => {
@@ -21,11 +23,11 @@ app.get('/', (req, res) => {
     res.send(`Instance running on PORT ${PORT}`);
 })
 
-app.get('/register', (req, res) => {
+app.get('/home/register', (req, res) => {
     res.sendFile(pathToViews + '/signup.html')
 })
 
-app.get('/login', (req, res) => {
+app.get('/home/login', (req, res) => {
     res.sendFile(pathToViews + '/login.html')
 })
 
