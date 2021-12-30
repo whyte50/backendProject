@@ -14,7 +14,7 @@ import Navlink from './components/pg/Navlink.vue'
 export default {
   components: {
     Navlink,
-  }
+  },
 }
 
 </script>

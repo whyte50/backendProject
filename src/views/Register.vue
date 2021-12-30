@@ -15,6 +15,7 @@
           <input class="form-control" v-model="user.email" type="email" placeholder="Email" style="margin-right: 5%;">
           <input class="form-control" v-model="user.password" type="password" placeholder="Password">
         </div>
+        <p class="error">{{ this.$store.state.error }}</p>
         <div class="submit-btn">
           <button>Sign Up</button>
         </div>

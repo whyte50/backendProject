@@ -1,53 +1,60 @@
 const express = require('express');
-const router = express.Router();
 const bcrypt = require('bcrypt');
-const uuid = require('uuid');
+const router = express.Router();
 
 const app = express();
+const cookieparser = require('cookie-parser')
 
-const http = require('http');
-const cookie = require('cookie-parser');
+app.use(cookieparser())
 
-const crypto = require('crypto');
-const key = crypto.randomBytes(32)
-const branca = require('branca')(key);
+const uuid = require('uuid')
+const jwt = require('jsonwebtoken')
 
-app.use(cookie())
+const key = '41755e12-a663-4c5c-8be8-ac472ea542db'
 
 const User = require('../model/user')
 const auth = require('../middleware/auth')
 
+const createToken = (id) => {
+    return jwt.sign({ id }, key)
+}
+
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body
     try {
-        // HASH PASSWORD
-        const value = 8
-        const encryptedPassword = await bcrypt.hash(password, value)
-
-        // CREATE TOKEN)
-        const token = branca.encode(email)
-
-        // SESSIONDATA
-        const sessionData = uuid.v4()
 
         // CONFIRM USER DOES NOT ALREADY EXIST
-        const existingUser = await User.findOne({ email });
 
-        if (existingUser) {
-        return res.status(409).send("User Already Exist. Please Login");
-        }
+        const existingUser = await User.findOne({ email });
+        const isUsername = await User.findOne({ username })
+
+        if (existingUser) { return res.status(409).send({ message : "Email Already Exist. Please Login"}) && console.log('Email already exists') }
+
+        else if(password.length < 7) { return res.status(401).send({ message : 'Password must be above 6 characters'}) }
+
+        else if (isUsername) { return res.status(401).send({ message : 'username is taken'}) }
 
         // SAVE USER TO MONGODB
-        const user = await User.create({
+
+        await  User.create({
             username,
             email,
-            password : encryptedPassword,
-            token,
-            sessionData
-        });
+            password
+        }) 
+        .then((user) => {
+            token = createToken(user._id)
+            res.cookie('token', token)
 
-        res.status(404).json(user)
-        console.log(user)
+            res.status(200).json(user)
+            console.log(user)
+        })
+
+        .catch((err) => {
+            console.log(err)
+        })
+
+        
+
     } catch (error) {
         console.log(error)
         res.send('failed')
@@ -56,39 +63,44 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
-    try {
+
         // VALIDATE USER 
         if(!(email && password)){
             res.status(403).send('Invalid email or password')
         }
         // CONFIRM USER DOES EXIST
         const user = await User.findOne({ email });
-        const validPassword = await bcrypt.compare(password, user.password)
-        if(user && validPassword){
-            // CREATE TOKEN
-            const token = branca.encode(email)
-            user.token = token;
-            
-            // res.setHeader('x-access-token', token);
-            res.cookie('token' , token);
+        if(user){
+            const authUser = await bcrypt.compare(password, user.password)
+            if(authUser){
+                token = createToken(user._id)
+                res.cookie('token', token)
+                res.status(200).json(user)
+                return
+            } else { return res.status(401).send({ message : 'Incorrect password'}) && console.log('Incorrect password') }
+        } else { return res.status(404).send({ message: 'Email does not exist'}) && console.log('Email does not exist') }
 
-        };
+})
 
-        return res.status(200).json(user)
+router.post('/logout', auth, (req, res) => {
+    res.clearCookie('token')
+    res.send('logged out')
+    console.log('logged out')
+})
 
-    } catch (error) {
-        console.log(error)
-        res.status(400).send({ error })
+router.get('/auth', (req, res) => {
+    const token = req.cookies.token
+
+    if(token) {
+        jwt.verify(token, '41755e12-a663-4c5c-8be8-ac472ea542db')
+        res.send('success')
+    } else {
+        return res.status(403).send({Error : "Not Authorized . Please log in"})
     }
 })
 
 router.get('/home', auth, (req, res) => {
-    res.send({ welcome : "welcome authorized user"})
-})
-
-router.post('/logout', (req, res) => {
-    res.clearCookie('token')
-    console.log('logged out')
+    res.send({ Success: 'you are autenticated'})
 })
 
 module.exports = router;

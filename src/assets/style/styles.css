@@ -10,7 +10,7 @@ h1 {
 }
 
 p {
-  font-family: poppins;
+  font-family: montserrat medium;
   font-size: 14px;
 }
 
@@ -152,11 +152,11 @@ p {
 
 .submit-btn button {
   width: 97px;
-  height: 34px;
+  height: 40px;
   background-color: #3A3A3A;
-  border-radius: 2px;
+  border-radius: 6px;
   color: white;
-  font-family: poppins;
+  font-family: montserrat;
   font-size: 12px;
   display: flex;
   justify-content: center;
@@ -283,3 +283,9 @@ p {
   justify-content: space-between;
 }
 
+.error {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: red
+}

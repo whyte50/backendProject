@@ -1,16 +1,17 @@
 <template>
     <div class="card-wrap">
         <div class="fin-card" :style="exit ? remove : null" type="button" @click="exit = !exit">
-            <span class="card-type">VISA</span>
-            <span class="card-number">1234&nbsp; 5678&nbsp; 9012&nbsp; 3456</span>
+            <span class="card-type">{{ card.cardType }}</span>
+            <span class="card-number">{{ card.cardNumber }}</span>
         </div>
-        <div class="edit-card" v-if="exit" type="button">
+        <div class="edit-card" v-if="exit" type="button" @click="deletecard(card.id)">
         <i class="fa fa-minus"></i>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: 'FinCard',
     data(){
@@ -22,7 +23,18 @@ export default {
             exit : false
         }
     },
-
+    props: {
+        card: Object
+    },
+    methods : {
+         async deletecard (id) {
+            await axios.get(`http://localhost:3000/payapi/cards/delete/${id}`)
+            .then(response => {
+                console.log(response)
+            })
+        }
+      
+    }
 }
 </script>
 

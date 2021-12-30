@@ -1,11 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import axios from 'axios'
 import Home from '../views/Home.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter: async (to, from, next) => {
+      try{
+        await axios({
+          url: 'http://localhost:3000/api/auth',
+          withCredentials: true
+        })
+        next()
+      }catch(err){
+        next('/login')
+        console.error(err)
+      }
+    }
   },
   {
     path: '/register',

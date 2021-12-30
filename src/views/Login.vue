@@ -6,13 +6,14 @@
         <h1 style="font-size: 80px">IN</h1>
       </div>
       <div class="form-container">
-        <form>
+        <form @submit.prevent="loginUser(user)">
           <div class="input-container">
-            <input class="form-control" type="text" placeholder="Username">
+            <input class="form-control" type="email" v-model="user.email" placeholder="Email">
           </div>
           <div class="input-container">
-            <input class="form-control" type="password" placeholder="Password">
+            <input class="form-control" type="password" v-model="user.password" placeholder="Password">
           </div>
+          <p class="error">{{ this.$store.state.error }}</p>
           <div class="submit-btn">
             <button>Login</button>
           </div>
@@ -23,7 +24,22 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
+export default {
+  name: 'Login',
+  data(){
+    return { 
+      user : {
+        email : '',
+        password : ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['loginUser'])
+  }
+}
 </script>
 
 <style>

@@ -4,7 +4,8 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser');
 
 require('./config/db')
-const ROUTER = require('./route/userRoute')
+const router = require('./route/userRoute')
+const cardRoute = require('./route/cardRoute')
 
 const app = express()
 const PORT = 3000; // default
@@ -13,22 +14,25 @@ const pathToViews = path.join(__dirname, 'src/')
 app.set('views', pathToViews)
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: false}))
+app.use(express.urlencoded({ extended: true}))
 app.use(cookieParser())
-app.use(cors())
-app.use(ROUTER)
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:8080'
+}))
+app.use('/api', router)
+app.use('/payapi',cardRoute)
 
 app.get('/', (req, res) => {
-    res.cookie('port', PORT)
     res.send(`Instance running on PORT ${PORT}`);
 })
 
-app.get('/home/register', (req, res) => {
+app.get('/register', (req, res) => {
     res.sendFile(pathToViews + '/signup.html')
 })
 
-app.get('/home/login', (req, res) => {
+app.get('/login', (req, res) => {
     res.sendFile(pathToViews + '/login.html')
 })
 
-app.listen(PORT, () => console.log(`server running on port ${PORT}`))
+app.listen(PORT, () => console.log(`server running on port ${PORT}, url: http://localhost:3000`))
