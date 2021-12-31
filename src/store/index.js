@@ -29,7 +29,8 @@ export default createStore({
       state.error = null
       state.cardData = null
       state.amount = null,
-      state.testData = null
+      state.testData = null,
+      state.params = null
     },
     addCard(state, card){
       state.cardData = card
