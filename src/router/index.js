@@ -10,7 +10,7 @@ const routes = [
     beforeEnter: async (to, from, next) => {
       try{
         await axios({
-          url: 'http://localhost:3000/api/auth',
+          url: 'https://backend--backendproject.herokuapp.com/api/auth',
           withCredentials: true
         })
         next()
