@@ -32,6 +32,9 @@ export default createStore({
     },
     newCard(state, card){
       state.testData = card
+    },
+    sucess(state){
+      state.error = null
     }
   },
   actions: {
@@ -50,7 +53,7 @@ export default createStore({
           commit('register', state.userDetails)
           commit('loggedIn')
 
-          state.error = null
+          commit('sucess')
           router.push('/')
         })
 
@@ -77,7 +80,7 @@ export default createStore({
           commit('loggedIn')
           commit('register', state.userDetails)
 
-          state.error = null
+          commit('sucess')
           // state.error = `Success: ${state.userDetails.username} has been logged in successfully`
           router.push('/')
         })
@@ -106,16 +109,14 @@ export default createStore({
         url : '/card',
         method : 'POST',
         data: {
-          cardType : state.testData.cardType,
           cardNumber: state.testData.cardNumber,
           exp: state.testData.exp,
-          pin: state.testData.pin,
           id: state.userDetails.id
         }
       })
       .then((response) => {
         console.log(response)
-        state.error = null
+        commit('sucess')
       })
 
       .catch((error) => {

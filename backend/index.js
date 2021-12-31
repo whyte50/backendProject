@@ -3,6 +3,8 @@ const path = require('path');
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 
+require('dotenv').config()
+
 require('./config/db')
 const router = require('./route/userRoute')
 const cardRoute = require('./route/cardRoute')

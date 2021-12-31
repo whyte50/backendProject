@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const cardSchema = new Schema({
 
-    cardType : {
+    brand : {
         type: String,
         required: true,
     },
@@ -23,7 +23,23 @@ const cardSchema = new Schema({
     },
     id: {
         type: String,
-        required: true,
+        required: true
+    },
+    cardType: {
+        type:  String,
+        required : true
+    },
+    country : {
+        type: String,
+        required : true
+    },
+    bank: {
+        type: String,
+        required : true
+    },
+    code: {
+        type: String,
+        required : true
     }
 })
 

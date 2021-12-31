@@ -1,7 +1,7 @@
 <template>
     <div class="card-wrap">
         <div class="fin-card" :style="exit ? remove : null" type="button" @click="exit = !exit">
-            <span class="card-type">{{ card.cardType }}</span>
+            <span class="card-type">{{ card.brand }}</span>
             <span class="card-number">{{ card.cardNumber }}</span>
         </div>
         <div class="edit-card" v-if="exit" type="button" @click="deletecard(card.id)">

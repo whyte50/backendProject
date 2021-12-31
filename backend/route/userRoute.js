@@ -99,8 +99,4 @@ router.get('/auth', (req, res) => {
     }
 })
 
-router.get('/home', auth, (req, res) => {
-    res.send({ Success: 'you are autenticated'})
-})
-
 module.exports = router;
