@@ -5,6 +5,6 @@ export default axios.create({
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin" : "*",
     },
-    baseURL: "http://localhost:3000/api",
+    baseURL: "https://backend--backendproject.herokuapp.com/api",
     withCredentials: true
 });

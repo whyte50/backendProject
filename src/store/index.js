@@ -128,8 +128,8 @@ export default createStore({
     addNewCard : async ({commit, state}, card) => {
       commit('newCard', card)
       await http({
-        baseURL : 'http://localhost:3000/payapi/',
-        url : '/card',
+        baseURL : 'https://backend--backendproject.herokuapp.com/',
+        url : '/payapi/card',
         method : 'POST',
         data: {
           cardNumber: state.testData.cardNumber,
@@ -161,7 +161,8 @@ export default createStore({
       .then(async (response) => {
         await axios({
           method: 'POST',
-          url: 'http://localhost:3000/payapi/account/benefit',
+          url: '/payapi/account/benefit',
+          baseUrl: 'https://backend--backendproject.herokuapp.com/',
           data: {
             accountName: response.data.data.account_name,
             accountNumber: response.data.data.account_number,
