@@ -1,5 +1,5 @@
 const express = require('express')
-const { Card, Amnt } = require('../model/card')
+const { Card, Amnt, Acct } = require('../model/card')
 const auth = require('../middleware/auth')
 
 const paystack = require('paystack-api')(process.env.secret_key)
@@ -59,6 +59,11 @@ router.get('/cards/:id', async (req, res) => {
     res.send(docs)  
 })
 
+router.get('/card/:id', async (req, res) => {
+    const docs = await Card.find({ _id: req.params.id})
+    res.send(docs)  
+})
+
 router.get('/cards/delete/:id', async (req, res) => {
     await Card.deleteOne({ id : req.params.id})
     .then((docs) => {
@@ -87,26 +92,21 @@ router.get('/amount/:id', async (req, res) => {
     .then((amount) => res.json(amount))
 })
 
-router.post('/send/bank', async (req, res) => {
-    await paystack.charge.charge({
-        email: "erro50.r5@gmail.com",
-        amount: "10000",
-        bank:{
-            code: "057",
-            account_number: "0000000000",
-        },
-        birthday: "1994-12-31",
-    })
-    .then( async (response) => {
-        await paystack.charge.submitOTP({ otp : '123456' , reference: response.data.reference})
-        .then( (response) => {
-            res.send(response)
-        })
-        .catch( (err) => {
-            console.log(err)
-        })
-    })
+router.get('/account/code_list', async (req, res) => {
+    await paystack.misc.list_banks()
+    .then((response) => res.send(response))
+})
 
+router.post('/account/benefit', async (req, res) => {
+    const { accountName, accountNumber, bankID, id } = req.body
+    await Acct.create({
+        accountName,
+        accountNumber,
+        bankID,
+        id
+    }).then((response) => {
+        res.json(response)
+    })
 })
 
 module.exports = router

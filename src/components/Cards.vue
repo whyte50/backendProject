@@ -9,7 +9,7 @@
                 <FinCard :card="card"/>
             </div>
             <div style="margin-top: 5%;" :style="exit ? remove : null" type="button" @click="exit = !exit">
-                <p @click="scroll('fund')"><i class="icon ion-android-add"></i>&nbsp; &nbsp;add card</p>
+                <p @click="scroll('card')"><i class="icon ion-android-add"></i>&nbsp; &nbsp;add card</p>
             </div>
         </div>
     </div>

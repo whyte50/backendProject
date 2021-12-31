@@ -3,14 +3,21 @@ import http from '../server/server.config.js'
 import createPersistedState from "vuex-persistedstate";
 import router from '../router/index'
 
+import axios from 'axios';
+
 export default createStore({
   state: {
     userDetails: null,
-    amount : '5600',
-    error : '',
+    amount : null,
+    error : null,
     isLoggedIn : false,
     cardData : null,
-    testData: null
+    testData: null,
+    modal: false,
+    params: {
+      acountNumber: null,
+      code : null
+    }
   },
   mutations: {
     register(state, user){
@@ -35,6 +42,22 @@ export default createStore({
     },
     sucess(state){
       state.error = null
+      state.testData = null
+    },
+    getAmount(state, amount) {
+      state.amount = amount
+    },
+    showModal(state){
+      state.modal = true
+    },
+    closeModal(state){
+      state.modal = false
+    },
+    addCode(state, payload) {
+      state.params.code = payload
+    },
+    addAccNum(state, payload){
+      state.params.acountNumber = payload
     }
   },
   actions: {
@@ -81,7 +104,6 @@ export default createStore({
           commit('register', state.userDetails)
 
           commit('sucess')
-          // state.error = `Success: ${state.userDetails.username} has been logged in successfully`
           router.push('/')
         })
 
@@ -93,7 +115,7 @@ export default createStore({
     logoutUser: async ({commit, state}) => {
       try{
         await http.post('/logout')
-        .then((response) =>{
+        .then(() =>{
           commit('logout')
 
           router.push('/login')
@@ -120,9 +142,36 @@ export default createStore({
       })
 
       .catch((error) => {
+        commit('newCard', null)
         state.error = error.response.data.message
       })
     },
+    verifyAccount : async ({commit, state}, accNum) => {
+      commit('addAccNum', accNum)
+      await axios({
+        baseURL: 'https://api.paystack.co',
+        port: 443,
+        url: `/bank/resolve?account_number=${state.params.acountNumber}&bank_code=${state.params.code}`,
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer sk_test_9b3f2dede7de67fcf534ed0f9b747517889153a9'
+        }
+      })
+      .then(async (response) => {
+        await axios({
+          method: 'POST',
+          url: 'http://localhost:3000/payapi/account/benefit',
+          data: {
+            accountName: response.data.data.account_name,
+            accountNumber: response.data.data.account_number,
+            bankID: response.data.data.bank_id,
+            id: state.userDetails.id
+          }
+        }).then((response) => {
+          console.log(response)
+        })
+      })
+    }
   },
   modules: {
   },

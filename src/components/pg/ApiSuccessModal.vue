@@ -1,31 +1,39 @@
 <template>
-   <div v-if="modal" class="modal-box">
+   <div class="modal-box">
         <div class="modal-dialog" >
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Card Data</h4>
-                    <button type="button" class="btn-close" @click="modal = !modal"></button>
+                    <button type="button" class="btn-close" @click="this.$store.commit('closeModal')"></button>
                 </div>
                 <div class="modal-body">
                     <div class="data">
-                        <p>Name</p>
-                        <p>Williams Eze</p>
+                        <p>Bank</p>
+                        <p>{{ this.$store.state.testData.bank }}</p>
                     </div>
                     <div class="data">
-                        <p>Bank Name</p>
-                        <p>United Bank for Africa</p>
+                        <p>Card Brand</p>
+                        <p>{{ this.$store.state.testData.brand }}</p>
                     </div>
                     <div class="data">
-                        <p>Amount</p>
-                        <p>₦25, 000</p>
+                        <p>Card Type</p>
+                        <p>{{ this.$store.state.testData.cardType }}</p>
                     </div>
                     <div class="data">
-                        <p>Name</p>
-                        <p>Paragraph</p>
+                        <p>Card Number</p>
+                        <p>{{ this.$store.state.testData.cardNumber }}</p>
+                    </div>
+                    <div class="data">
+                        <p>Country</p>
+                        <p>{{ this.$store.state.testData.country }}</p>
+                    </div>
+                    <div class="data">
+                        <p>Code</p>
+                        <p>{{ this.$store.state.testData.code }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-light" type="button" @click="modal = !modal">Close</button>
+                    <button class="btn btn-light" type="button" @click="this.$store.commit('closeModal')">Close</button>
                 </div>
             </div>
         </div>
@@ -35,12 +43,6 @@
 <script>
 export default {
     name: 'ApiSuccessModal',
-    props: {
-        modal : {
-            type : Boolean,
-            default : false
-        }
-    }
 }
 </script>
 

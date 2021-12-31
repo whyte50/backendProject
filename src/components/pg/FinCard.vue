@@ -4,9 +4,10 @@
             <span class="card-type">{{ card.brand }}</span>
             <span class="card-number">{{ card.cardNumber }}</span>
         </div>
-        <div class="edit-card" v-if="exit" type="button" @click="deletecard(card.id)">
+        <div class="edit-card" v-show="exit" type="button" @click="deletecard(card.id)">
         <i class="fa fa-minus"></i>
         </div>
+        <div class="edit-card" v-show="exit" @click="getcardbyid(card._id)" type="button"><i class="fa fa-eye"></i></div>
     </div>
 </template>
 
@@ -18,7 +19,6 @@ export default {
         return {
             remove: {
                 border: '1px solid red',
-                color: 'red',
             },
             exit : false
         }
@@ -31,6 +31,13 @@ export default {
             await axios.get(`http://localhost:3000/payapi/cards/delete/${id}`)
             .then(response => {
                 console.log(response)
+            })
+        },
+        async getcardbyid (id) {
+            await axios.get(`http://localhost:3000/payapi/card/${id}`)
+            .then((response) => {
+                this.$store.commit('newCard', response.data[0])
+                this.$store.commit('showModal')
             })
         }
       

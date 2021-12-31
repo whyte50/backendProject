@@ -52,7 +52,23 @@ const amountSchema = new Schema({
     }
 })
 
-const Card = mongoose.model('cardModel', cardSchema);
-const Amnt = mongoose.model('account', amountSchema)
+const accountSchema = new Schema({
+    accountName : {
+        type: String
+    },
+    accountNumber: {
+        type: String,
+    },
+    bankID : {
+        type : String
+    },
+    id : {
+        type: String
+    }
+})
 
-module.exports = { Card, Amnt }
+const Card = mongoose.model('cardModel', cardSchema);
+const Amnt = mongoose.model('account', amountSchema);
+const Acct = mongoose.model('beneficiary', accountSchema)
+
+module.exports = { Card, Amnt, Acct }

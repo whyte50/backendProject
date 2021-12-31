@@ -261,7 +261,7 @@ p {
 }
 
 .addcard-wrapper {
-  margin-top: 11%;
+  padding-top: 21%;
   padding-left: 39%;
   display: flex;
   flex-direction: row;
@@ -285,3 +285,81 @@ p {
   font-weight: bold;
   color: red
 }
+
+.route {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dart {
+  background-color: #ffffff;
+  width: 462px;
+  height: 58px;
+  box-shadow: 0px 9px 200px rgba(33,37,41,0.19);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: fixed;
+  border: 1px solid red;
+  border-radius: 6px;
+  top: 0;
+  z-index: 1;
+  margin-top: 28px;
+}
+
+.dart p {
+  margin: 0;
+}
+
+.card-wrap div:nth-child(2) {
+  margin-right: 6%;
+}
+
+.jet {
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+}
+
+.dret h1 {
+  font-size: 30px;
+}
+
+.form-container.glee.set {
+  padding-right: 30%;
+  width: 50%;
+  margin-top: 0;
+  margin-right: 20%
+}
+
+.banks {
+  width: 100%;
+  height: auto;
+  margin-bottom: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #999090;
+  color: #ffffff;
+  padding: 20px;
+}
+
+.banks p {
+  margin: 0;
+}
+
+.content-container {
+  width: 200px;
+}
+
+.fund-wrapper {
+  margin-top: 21%;
+  padding-left: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+

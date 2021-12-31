@@ -1,5 +1,5 @@
 <template>
-    <div class="addcard-wrapper" id="fund">
+    <div class="addcard-wrapper">
         <div>
             <div class="content-container">
                 <h1>add card</h1>
@@ -13,16 +13,14 @@
                 </div>
                 <div class="input-container">
                     <input class="form-control" type="month" v-model="card.exp" placeholder="Exp" style="margin-right: 5%;">
-                    <input class="form-control" type="password" placeholder="Amount" disabled>
+                    <!-- <input class="form-control" type="password" placeholder="Amount" disabled> -->
                 </div>
-                <p class="error">{{ this.$store.state.error }}</p>
                 <div class="submit-btn">
                     <button>Sign Up</button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="footerr"><img src="../../assets/down.svg"></div>
 </template>
 
 <script>

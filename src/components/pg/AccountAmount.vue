@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'AccountAmount',
     data(){
@@ -34,6 +36,12 @@ export default {
                 behavior: 'smooth'
             })
         }
+    },
+    async created () {
+        await axios.get(`http://localhost:3000/payapi/amount/${this.$store.state.userDetails.id}`)
+        .then((response) => {
+            this.$store.commit('getAmount', response.data.amount)
+        })
     }
 }
 </script>
