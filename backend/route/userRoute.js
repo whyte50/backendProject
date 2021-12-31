@@ -13,6 +13,7 @@ const jwt = require('jsonwebtoken')
 const key = '41755e12-a663-4c5c-8be8-ac472ea542db'
 
 const User = require('../model/user')
+const { Amnt } = require('../model/card')
 const auth = require('../middleware/auth')
 
 const createToken = (id) => {
@@ -41,7 +42,10 @@ router.post('/register', async (req, res) => {
             email,
             password
         }) 
-        .then((user) => {
+        .then( async (user) => {
+            const ant = await Amnt.create({ amount: '5000', id: user.id })
+            console.log(ant)
+
             token = createToken(user._id)
             res.cookie('token', token)
 

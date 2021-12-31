@@ -260,16 +260,12 @@ p {
   font-size: 12px;
 }
 
-.fund-wrapper {
+.addcard-wrapper {
   margin-top: 11%;
-  padding-left: 30%;
+  padding-left: 39%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.form-container.glee {
-  margin-top: 65px;
 }
 
 .footerr {

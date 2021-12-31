@@ -69,18 +69,44 @@ router.get('/cards/delete/:id', async (req, res) => {
     })
 })
 
-router.get('/pay/:bin', async (req, res) => {
-    try{
-        const data = paystack.verification.resolveBIN({ bin : req.params.bin })
-        const pat = data.uri.href
-        getJSON(pat, (err, data) => {
-            res.json(data)
-        })
-        
-    } catch(err) {
+router.post('/send/email', async (req, res) => {
+    const { email, amount } = req.body
+    await paystack.transaction.initialize({
+        email : email,
+        amount: amount
+    })
+    .then((response) => {
+        res.redirect(response.data.authorization_url)
+    }) .catch((err) => {
         console.log(err)
-        res.status(400).send(err)
-    }
+    })
+})
+
+router.get('/amount/:id', async (req, res) => {
+    await Amnt.findOne({ id: req.params.id })
+    .then((amount) => res.json(amount))
+})
+
+router.post('/send/bank', async (req, res) => {
+    await paystack.charge.charge({
+        email: "erro50.r5@gmail.com",
+        amount: "10000",
+        bank:{
+            code: "057",
+            account_number: "0000000000",
+        },
+        birthday: "1994-12-31",
+    })
+    .then( async (response) => {
+        await paystack.charge.submitOTP({ otp : '123456' , reference: response.data.reference})
+        .then( (response) => {
+            res.send(response)
+        })
+        .catch( (err) => {
+            console.log(err)
+        })
+    })
+
 })
 
 module.exports = router
