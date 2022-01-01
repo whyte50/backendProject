@@ -156,8 +156,10 @@ export default createStore({
       })
     },
     verifyAccount : async ({commit, state}, accNum) => {
+
       commit('addAccNum', accNum)
-      await axios({
+      
+      const confirmed = await axios({
         baseURL: 'https://api.paystack.co',
         port: 443,
         url: `/bank/resolve?account_number=${state.params.acountNumber}&bank_code=${state.params.code}`,
@@ -166,8 +168,9 @@ export default createStore({
           Authorization: 'Bearer sk_test_9b3f2dede7de67fcf534ed0f9b747517889153a9'
         }
       })
-      .then(async (response) => {
-        commit('newCard', response.data.data)
+
+      if(confirmed) {
+        commit('newCard', confirmed.data.data)
 
         await axios({
           method: 'POST',
@@ -179,11 +182,15 @@ export default createStore({
             bankID: state.testData.bank_id,
             id: state.userDetails.id
           }
-        }).then((response) => {
+        })
+        
+        .then((response) => {
           console.log(response)
           state.error = "Beneficiary Added."
         })
-      })
+
+      }
+
     }
   },
   modules: {
