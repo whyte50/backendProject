@@ -12,7 +12,7 @@
                     <input class="form-control" type="text" v-model="card.cardNumber" placeholder="Card Number">
                 </div>
                 <div class="input-container">
-                    <input class="form-control" type="month" v-model="card.exp" placeholder="Exp" style="margin-right: 5%;">
+                    <input class="form-control" type="month" v-model="card.exp" placeholder="Exp">
                     <!-- <input class="form-control" type="password" placeholder="Amount" disabled> -->
                 </div>
                 <div class="submit-btn">
