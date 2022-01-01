@@ -38,7 +38,7 @@ export default {
         }
     },
     async created () {
-        await axios.get(`http://localhost:3000/payapi/amount/${this.$store.state.userDetails.id}`)
+        await axios.get(`https://backend--backendproject.herokuapp.com/payapi/amount/${this.$store.state.userDetails.id}`)
         .then((response) => {
             this.$store.commit('getAmount', response.data.amount)
         })

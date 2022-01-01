@@ -6,5 +6,6 @@ export default axios.create({
         "Access-Control-Allow-Origin" : "*",
     },
     baseURL: "https://backend--backendproject.herokuapp.com/api",
+    // baseURL: "http://localhost:3000/api",
     withCredentials: true
 });

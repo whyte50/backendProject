@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import axios from 'axios'
 import Home from '../views/Home.vue'
+import jwt from 'jsonwebtoken'
+import store from '../store/index'
 
 const routes = [
   {
@@ -8,16 +9,14 @@ const routes = [
     name: 'Home',
     component: Home,
     beforeEnter: async (to, from, next) => {
-      try{
-        await axios({
-          url: 'https://backend--backendproject.herokuapp.com/api/auth',
-          withCredentials: true
-        })
-        next()
-      }catch(err){
-        next('/login')
-        console.error(err)
-      }
+        const token = sessionStorage.getItem('token')
+        if(token) {
+          jwt.verify(token, store.state.userDetails.key)
+          console.log('sucess')
+          next()
+        } else {
+          next('/login')
+        }
     }
   },
   {

@@ -28,13 +28,13 @@ export default {
     },
     methods : {
          async deletecard (id) {
-            await axios.get(`http://localhost:3000/payapi/cards/delete/${id}`)
+            await axios.get(`https://backend--backendproject.herokuapp.com/payapi/cards/delete/${id}`)
             .then(response => {
                 console.log(response)
             })
         },
         async getcardbyid (id) {
-            await axios.get(`http://localhost:3000/payapi/card/${id}`)
+            await axios.get(`https://backend--backendproject.herokuapp.com/payapi/card/${id}`)
             .then((response) => {
                 this.$store.commit('newCard', response.data[0])
                 this.$store.commit('showModal')

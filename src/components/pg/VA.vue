@@ -43,7 +43,7 @@ export default {
         }
     },
     async created() {
-        await axios.get('http://localhost:3000/payapi/account/code_list')
+        await axios.get('https://backend--backendproject.herokuapp.com/payapi/account/code_list')
         .then((response) => {
             this.banks = response.data.data
             console.log(response.data)

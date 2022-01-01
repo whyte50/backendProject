@@ -74,6 +74,7 @@ export default createStore({
         .then((response) => {
 
           state.userDetails.id = response.data._id
+          state.userDetails = response.data.key
           commit('register', state.userDetails)
           commit('loggedIn')
 
@@ -99,8 +100,11 @@ export default createStore({
         
         .then((response) => {
 
-          state.userDetails.id = response.data._id
-          state.userDetails.username = response.data.username
+          state.userDetails.id = response.data.user._id
+          state.userDetails.username = response.data.user.username
+          state.userDetails.key = response.data.key
+
+          sessionStorage.setItem('token', response.data.token)
           commit('loggedIn')
           commit('register', state.userDetails)
 
@@ -115,12 +119,9 @@ export default createStore({
     },
     logoutUser: async ({commit, state}) => {
       try{
-        await http.post('/logout')
-        .then(() =>{
-          commit('logout')
-
-          router.push('/login')
-        })
+        sessionStorage.removeItem('token')
+        commit('logout')
+        router.push('/login')
       }catch(err){
         console.log(err)
       }

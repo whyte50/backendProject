@@ -10,6 +10,7 @@
 <script>
 import axios from "axios";
 import store from '../store/index'
+import jwt from 'jsonwebtoken'
 
 import AccountAmount from "./pg/AccountAmount.vue"
 import Alert from './pg/Alert'
@@ -34,16 +35,17 @@ export default {
   },
   async created(){
 
-    await axios({
-      url: 'http://localhost:3000/api/auth',
-      withCredentials: true
-    })
-    .then(async () => {
-      await axios.get(`http://localhost:3000/payapi/cards/${store.state.userDetails.id}`)
-      .then((response) => {
-        store.commit('addCard', response.data)
-      })
-    })
+    const token = sessionStorage.getItem('token')
+    if (token) {
+      const auth = jwt.verify(token, store.state.userDetails.key)
+      if (auth) {
+        await axios.get(`https://backend--backendproject.herokuapp.com/payapi/cards/${store.state.userDetails.id}`)
+        .then((response) => {
+          store.commit('addCard', response.data)
+        })
+      }
+    }
+    
     
   }
 }
