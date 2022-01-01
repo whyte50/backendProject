@@ -16,7 +16,7 @@
                     <!-- <input class="form-control" type="password" placeholder="Amount" disabled> -->
                 </div>
                 <div class="submit-btn">
-                    <button>Sign Up</button>
+                    <button>Add Card</button>
                 </div>
             </form>
         </div>

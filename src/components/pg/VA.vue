@@ -25,7 +25,7 @@
         <form @submit.prevent="this.$store.dispatch('verifyAccount', accNum)">
             <div class="input-container"><input type="text" class="form-control" v-model="accNum" placeholder="Account Number" /></div>
             <div class="input-container"><input type="text" class="form-control" placeholder="Amount" /></div>
-            <div class="submit-btn"><button>Save Account</button></div>
+            <div class="submit-btn"><button>Save</button></div>
         </form>
     </div>
 </div>
