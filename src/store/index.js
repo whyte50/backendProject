@@ -172,7 +172,7 @@ export default createStore({
 
       await axios({
         method: 'POST',
-        url: 'https://backend--backendproject.herokuapp.com/',
+        url: 'https://backend--backendproject.herokuapp.com/payapi/account/benefit',
         headers: {
           "Content-Type": "application/json",
         },
