@@ -23,15 +23,6 @@ export default createStore({
     register(state, user){
       state.userDetails = user
     },
-    logout(state){
-      state.userDetails = null;
-      state.isLoggedIn = false
-      state.error = null
-      state.cardData = null
-      state.amount = null,
-      state.testData = null,
-      state.params = null
-    },
     addCard(state, card){
       state.cardData = card
     },
@@ -122,7 +113,7 @@ export default createStore({
     logoutUser: async ({commit, state}) => {
       try{
         sessionStorage.removeItem('token')
-        commit('logout')
+        localStorage.removeItem('vuex')
         router.push('/login')
       }catch(err){
         console.log(err)
@@ -155,7 +146,7 @@ export default createStore({
         state.error = error.response.data.message
       })
     },
-    verifyAccount : async ({commit, state}, accNum) => {
+    verifyAccount : async ({commit, dispatch, state}, accNum) => {
 
       commit('addAccNum', accNum);
 
@@ -171,29 +162,33 @@ export default createStore({
 
       .then(async (response) => {
 
+        // state.error = "Beneficiary Added."
         commit('newCard', response.data.data);
-
-        await axios({
-          method: 'POST',
-          url: '/payapi/account/benefit',
-          baseUrl: 'https://backend--backendproject.herokuapp.com/',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          data: {
-            accountName: state.testData.account_name,
-            accountNumber: state.testData.account_number,
-            bankID: state.testData.bank_id,
-            id: state.userDetails.id
-          }
-        })
-        
-        .then((response) => {
-          console.log(response)
-          state.error = "Beneficiary Added."
-        })
+        dispatch('addBeneficiary')
 
       })
+    },
+    addBeneficiary : async ({commit, state}) => {
+
+      await axios({
+        method: 'POST',
+        url: 'https://backend--backendproject.herokuapp.com/',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          accountName: state.testData.account_name,
+          accountNumber: state.testData.account_number,
+          bankID: state.testData.bank_id,
+          id: state.userDetails.id
+        }
+      })
+        
+      .then((response) => {
+        console.log(response)
+        state.error = "Beneficiary Added."
+      })
+
     }
   },
   modules: {
