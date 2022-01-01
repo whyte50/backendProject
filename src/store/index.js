@@ -155,8 +155,8 @@ export default createStore({
         state.error = error.response.data.message
       })
     },
-    verifyAccount : async ({commit, state}, accNum) => {
-      commit('addAccNum', accNum)
+    verifyAccount : async ({commit, state}, data) => {
+      commit('addAccNum', data);
       await axios({
         baseURL: 'https://api.paystack.co',
         port: 443,
