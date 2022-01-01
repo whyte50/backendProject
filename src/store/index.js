@@ -15,9 +15,10 @@ export default createStore({
     testData: null,
     modal: false,
     params: {
-      code : null,
-      data : null,
+      acountNumber: null,
+      code : null
     },
+    pay : null
   },
   mutations: {
     register(state, user){
@@ -60,7 +61,10 @@ export default createStore({
       state.params.code = payload
     },
     addAccNum(state, payload){
-      state.params.data = payload
+      state.params.acountNumber = payload
+    },
+    payCash(state, payload){
+      state.pay = payload
     }
   },
   actions: {
@@ -155,12 +159,12 @@ export default createStore({
         state.error = error.response.data.message
       })
     },
-    verifyAccount : async ({commit, state}, data) => {
-      commit('addAccNum', data);
+    verifyAccount : async ({commit, state}, accNum) => {
+      commit('addAccNum', accNum)
       await axios({
         baseURL: 'https://api.paystack.co',
         port: 443,
-        url: `/bank/resolve?account_number=${state.params.data.accNum}&bank_code=${state.params.code}`,
+        url: `/bank/resolve?account_number=${state.params.acountNumber}&bank_code=${state.params.code}`,
         method: 'GET',
         headers: {
           Authorization: 'Bearer sk_test_9b3f2dede7de67fcf534ed0f9b747517889153a9'
@@ -184,6 +188,7 @@ export default createStore({
         }).then(async (response) => {
           console.log(response)
           state.error = "Beneficiary Added."
+
           await axios({
             method: 'POST',
             url: '/payapi/send/email',
@@ -193,16 +198,17 @@ export default createStore({
               "Access-Control-Allow-Origin" : "*",
             },
             data: {
-              email: state.params.data.email,
-              amount: state.params.data.amount
+              email: state.pay.email,
+              amount: state.pay.amount
             }
           })
-          .then((response)  => {
-            console.log(response.data)
+
+          .then((response) => {
+            console.log(response)
           })
-          .catch((err) => {
-            console.log(err)
-          })
+
+          .catch((error) => { console.log(error) })
+
         })
       })
     }
