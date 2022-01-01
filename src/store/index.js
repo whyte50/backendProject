@@ -157,9 +157,9 @@ export default createStore({
     },
     verifyAccount : async ({commit, state}, accNum) => {
 
-      commit('addAccNum', accNum)
-      
-      const confirmed = await axios({
+      commit('addAccNum', accNum);
+
+      await axios({
         baseURL: 'https://api.paystack.co',
         port: 443,
         url: `/bank/resolve?account_number=${state.params.acountNumber}&bank_code=${state.params.code}`,
@@ -169,13 +169,18 @@ export default createStore({
         }
       })
 
-      if(confirmed) {
-        commit('newCard', confirmed.data.data)
+      .then(async (response) => {
+
+        commit('newCard', response.data.data);
 
         await axios({
           method: 'POST',
           url: '/payapi/account/benefit',
           baseUrl: 'https://backend--backendproject.herokuapp.com/',
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin" : "*",
+          },
           data: {
             accountName: state.testData.account_name,
             accountNumber: state.testData.account_number,
@@ -189,8 +194,7 @@ export default createStore({
           state.error = "Beneficiary Added."
         })
 
-      }
-
+      })
     }
   },
   modules: {
