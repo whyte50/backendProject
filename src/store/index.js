@@ -167,7 +167,7 @@ export default createStore({
         }
       })
       .then(async (response) => {
-        state.testData = response.data.data;
+        commit('newCard', response.data.data)
 
         await axios({
           method: 'POST',
