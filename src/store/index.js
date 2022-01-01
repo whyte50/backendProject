@@ -166,8 +166,6 @@ export default createStore({
         method: 'GET',
         headers: {
           Authorization: 'Bearer sk_test_9b3f2dede7de67fcf534ed0f9b747517889153a9',
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin" : "*",
         }
       })
 
@@ -181,7 +179,6 @@ export default createStore({
           baseUrl: 'https://backend--backendproject.herokuapp.com/',
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin" : "*",
           },
           data: {
             accountName: state.testData.account_name,
