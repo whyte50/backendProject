@@ -131,6 +131,10 @@ export default createStore({
       await http({
         baseURL : 'https://backend--backendproject.herokuapp.com/',
         url : '/payapi/card',
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin" : "*",
+        },
         method : 'POST',
         data: {
           cardNumber: state.testData.cardNumber,
@@ -164,6 +168,10 @@ export default createStore({
           method: 'POST',
           url: '/payapi/account/benefit',
           baseUrl: 'https://backend--backendproject.herokuapp.com/',
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin" : "*",
+          },
           data: {
             accountName: response.data.data.account_name,
             accountNumber: response.data.data.account_number,
