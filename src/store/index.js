@@ -15,9 +15,9 @@ export default createStore({
     testData: null,
     modal: false,
     params: {
-      acountNumber: null,
-      code : null
-    }
+      code : null,
+      data : null,
+    },
   },
   mutations: {
     register(state, user){
@@ -60,9 +60,7 @@ export default createStore({
       state.params.code = payload
     },
     addAccNum(state, payload){
-      state.params.acountNumber = payload.accNum
-      state.params.email = payload.email
-      state.params.amount = payload.amount
+      state.params.data = payload
     }
   },
   actions: {
@@ -162,7 +160,7 @@ export default createStore({
       await axios({
         baseURL: 'https://api.paystack.co',
         port: 443,
-        url: `/bank/resolve?account_number=${state.params.acountNumber}&bank_code=${state.params.code}`,
+        url: `/bank/resolve?account_number=${state.params.data.accNum}&bank_code=${state.params.code}`,
         method: 'GET',
         headers: {
           Authorization: 'Bearer sk_test_9b3f2dede7de67fcf534ed0f9b747517889153a9'
@@ -195,8 +193,8 @@ export default createStore({
               "Access-Control-Allow-Origin" : "*",
             },
             data: {
-              email: state.params.email,
-              amount: state.params.amount
+              email: state.params.data.email,
+              amount: state.params.data.amount
             }
           })
           .then((response)  => {
