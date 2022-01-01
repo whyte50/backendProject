@@ -171,6 +171,7 @@ export default createStore({
         }
       })
       .then(async (response) => {
+        console.log(response)
         await axios({
           method: 'POST',
           url: '/payapi/account/benefit',
