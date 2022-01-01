@@ -31,6 +31,7 @@ export default {
             await axios.get(`https://backend--backendproject.herokuapp.com/payapi/cards/delete/${id}`)
             .then(response => {
                 console.log(response)
+                this.$store.state.error = "Card deleted successfully"
             })
         },
         async getcardbyid (id) {
