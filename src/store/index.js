@@ -42,8 +42,10 @@ export default createStore({
       state.testData = card
     },
     sucess(state){
-      state.error = null
       state.testData = null
+    },
+    clearError(state){
+      state.error = null
     },
     getAmount(state, amount) {
       state.amount = amount
@@ -144,6 +146,7 @@ export default createStore({
       })
       .then((response) => {
         console.log(response)
+        state.error = "Card Added. Refresh to see changes"
         commit('sucess')
       })
 
@@ -180,6 +183,7 @@ export default createStore({
           }
         }).then((response) => {
           console.log(response)
+          state.error = "Beneficiary Added."
         })
       })
     }
