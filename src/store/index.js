@@ -165,7 +165,9 @@ export default createStore({
         url: `/bank/resolve?account_number=${state.params.acountNumber}&bank_code=${state.params.code}`,
         method: 'GET',
         headers: {
-          Authorization: 'Bearer sk_test_9b3f2dede7de67fcf534ed0f9b747517889153a9'
+          Authorization: 'Bearer sk_test_9b3f2dede7de67fcf534ed0f9b747517889153a9',
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin" : "*",
         }
       })
 
