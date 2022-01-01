@@ -17,8 +17,7 @@ export default createStore({
     params: {
       acountNumber: null,
       code : null
-    },
-    pay : null
+    }
   },
   mutations: {
     register(state, user){
@@ -62,9 +61,6 @@ export default createStore({
     },
     addAccNum(state, payload){
       state.params.acountNumber = payload
-    },
-    payCash(state, payload){
-      state.pay = payload
     }
   },
   actions: {
@@ -171,7 +167,6 @@ export default createStore({
         }
       })
       .then(async (response) => {
-        console.log(response)
         await axios({
           method: 'POST',
           url: '/payapi/account/benefit',
@@ -186,30 +181,9 @@ export default createStore({
             bankID: response.data.data.bank_id,
             id: state.userDetails.id
           }
-        }).then(async (response) => {
+        }).then((response) => {
           console.log(response)
           state.error = "Beneficiary Added."
-
-          await axios({
-            method: 'POST',
-            url: '/payapi/send/email',
-            baseUrl: 'https://backend--backendproject.herokuapp.com/',
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin" : "*",
-            },
-            data: {
-              email: state.pay.email,
-              amount: state.pay.amount
-            }
-          })
-
-          .then((response) => {
-            console.log(response)
-          })
-
-          .catch((error) => { console.log(error) })
-
         })
       })
     }
