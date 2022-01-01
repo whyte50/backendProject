@@ -167,6 +167,8 @@ export default createStore({
         }
       })
       .then(async (response) => {
+        state.testData = response.data.data;
+
         await axios({
           method: 'POST',
           url: '/payapi/account/benefit',
@@ -176,9 +178,9 @@ export default createStore({
             "Access-Control-Allow-Origin" : "*",
           },
           data: {
-            accountName: response.data.data.account_name,
-            accountNumber: response.data.data.account_number,
-            bankID: response.data.data.bank_id,
+            accountName: state.testData.account_name,
+            accountNumber: state.testData.account_number,
+            bankID: state.testData.bank_id,
             id: state.userDetails.id
           }
         }).then((response) => {
