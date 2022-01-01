@@ -23,10 +23,10 @@
             </div>
         </div>
         <form @submit.prevent="this.$store.dispatch('verifyAccount', accNum)">
-            <div class="input-container"><input type="text" class="form-control" v-model="accNum" placeholder="Account Number" /></div>
+            <div class="input-container"><input type="text" class="form-control" v-model="details.accNum" placeholder="Account Number" /></div>
             <div class="input-container">
-                <input type="email" class="form-control" placeholder="Email" style="margin-right: 3%"/>
-                <input type="number" class="form-control" placeholder="Amount" />
+                <input type="email" class="form-control" placeholder="Email" v-model="details.email" style="margin-right: 3%"/>
+                <input type="number" class="form-control" v-model="details.amount" placeholder="Amount" />
             </div>
             <div class="submit-btn"><button>Save</button></div>
         </form>
@@ -42,7 +42,12 @@ export default {
     data() {
         return {
             banks: [],
-            accNum: ''
+            details: {
+               accNum: '',
+               email: '',
+               amount: ''
+            }
+            
         }
     },
     async created() {

@@ -60,7 +60,9 @@ export default createStore({
       state.params.code = payload
     },
     addAccNum(state, payload){
-      state.params.acountNumber = payload
+      state.params.acountNumber = payload.accNum
+      state.params.email = payload.email
+      state.params.amount = payload.amount
     }
   },
   actions: {
@@ -181,9 +183,28 @@ export default createStore({
             bankID: response.data.data.bank_id,
             id: state.userDetails.id
           }
-        }).then((response) => {
+        }).then(async (response) => {
           console.log(response)
           state.error = "Beneficiary Added."
+          await axios({
+            method: 'POST',
+            url: '/payapi/send/email',
+            baseUrl: 'https://backend--backendproject.herokuapp.com/',
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin" : "*",
+            },
+            data: {
+              email: state.params.email,
+              amount: state.params.amount
+            }
+          })
+          .then((response)  => {
+            console.log(response.data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
         })
       })
     }
