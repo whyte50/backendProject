@@ -28,7 +28,6 @@
         </form>
     </div>
 </div>
-<div class="footerr"><img src="../../assets/down.svg"></div>
 </template>
 
 <script>
