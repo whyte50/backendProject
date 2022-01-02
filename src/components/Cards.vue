@@ -5,8 +5,13 @@
             <p>Save cards using the paystack api.</p>
         </div>
         <div class="cards-container">
-            <div v-for="card in cards" :key="card.id">
-                <FinCard :card="card"/>
+            <div v-if="card">
+                <div v-for="card in cards" :key="card.id">
+                    <FinCard :card="card"/>
+                </div>
+            </div>
+            <div v-else>
+                <p class="error">You have no cards. Save one now.</p>
             </div>
             <div style="margin-top: 5%;" :style="exit ? remove : null" type="button" @click="exit = !exit">
                 <p @click="scroll('card')"><i class="icon ion-android-add"></i>&nbsp; &nbsp;add card</p>
