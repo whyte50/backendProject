@@ -29,6 +29,9 @@ export default createStore({
     loggedIn(state){
       state.isLoggedIn = true
     },
+    logout(state){
+      state.isLoggedIn = false
+    },
     newCard(state, card){
       state.testData = card
     },
@@ -113,6 +116,8 @@ export default createStore({
     },
     logoutUser: async ({commit, state}) => {
       try{
+        commit('logout');
+
         sessionStorage.removeItem('token')
         localStorage.removeItem('vuex')
         router.push('/login')
