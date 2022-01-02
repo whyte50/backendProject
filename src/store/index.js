@@ -69,8 +69,11 @@ export default createStore({
         
         .then((response) => {
 
-          state.userDetails.id = response.data._id
-          state.userDetails = response.data.key
+          state.userDetails.id = response.data.user._id
+          state.userDetails.key = response.data.key
+
+          localStorage.setItem('token', response.data.token)
+
           commit('register', state.userDetails)
           commit('loggedIn')
 
