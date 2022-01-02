@@ -39,7 +39,7 @@ export default {
   },
   async created(){
 
-    const token = sessionStorage.getItem('token')
+    const token = localStorage.getItem('token')
     if (token) {
       const auth = jwt.verify(token, store.state.userDetails.key)
       if (auth) {
