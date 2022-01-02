@@ -162,11 +162,15 @@ export default createStore({
 
       .then(async (response) => {
 
-        // state.error = "Beneficiary Added."
         commit('newCard', response.data.data);
         dispatch('addBeneficiary')
 
       })
+
+      .catch((error) => {
+        state.error = 'Please Select Your Bank'
+      })
+
     },
     addBeneficiary : async ({commit, state}) => {
 
@@ -187,6 +191,10 @@ export default createStore({
       .then((response) => {
         console.log(response)
         state.error = "Beneficiary Added."
+      })
+
+      .catch((error) => {
+        state.error = error.response.data.message
       })
 
     }
