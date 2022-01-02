@@ -9,7 +9,7 @@ const routes = [
     name: 'Home',
     component: Home,
     beforeEnter: async (to, from, next) => {
-        const token = sessionStorage.getItem('token')
+        const token = localStorage.getItem('token')
         if(token) {
           jwt.verify(token, store.state.userDetails.key)
           console.log('sucess')

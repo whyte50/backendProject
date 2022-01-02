@@ -97,7 +97,8 @@ export default createStore({
           state.userDetails.username = response.data.user.username
           state.userDetails.key = response.data.key
 
-          sessionStorage.setItem('token', response.data.token)
+          localStorage.setItem('token', response.data.token)
+          
           commit('loggedIn')
           commit('register', state.userDetails)
 
