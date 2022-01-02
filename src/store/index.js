@@ -83,8 +83,6 @@ export default createStore({
 
         .catch((error) => {
           state.error = error.response.data.message
-          const userr = null
-          commit('register', userr)
         })
 
     },
