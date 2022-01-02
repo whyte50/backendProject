@@ -7,12 +7,12 @@
             </div>
         </div>
         <div class="form-container">
-            <form @submit.prevent>
+            <form @submit.prevent="addNewCard(card)">
                 <div class="input-container">
-                    <input class="form-control" type="text" placeholder="Card Number">
+                    <input class="form-control" type="text" v-model="card.cardNumber" placeholder="Card Number">
                 </div>
                 <div class="input-container">
-                    <input class="form-control" type="month" placeholder="Exp">
+                    <input class="form-control" type="month" v-model="card.exp" placeholder="Exp">
                     <!-- <input class="form-control" type="password" placeholder="Amount" disabled> -->
                 </div>
                 <div class="submit-btn">
@@ -21,7 +21,6 @@
             </form>
         </div>
     </div>
-<div class="footerr"><img src="../../assets/down.svg"></div>
 </template>
 
 <script>
@@ -31,11 +30,15 @@ export default {
     name : 'FundAccount',
     data(){
         return {
-            
+            card : {
+                cardNumber: '',
+                exp: '',
+                pin: '',
+            }
         }
     },
     methods: {
-        ...mapActions([])
+        ...mapActions(['addNewCard'])
     }
 }
 </script>

@@ -3,8 +3,9 @@
   <Modal v-if="this.$store.state.modal"/>
   <AccountAmount />
   <Cards :cards="this.$store.state.cardData" />
-  <Fund id="card"/>
+  <Save id="card"/>
   <VA />
+  <Fund />
 </template>
 
 <script>
@@ -17,7 +18,9 @@ import Alert from './pg/Alert'
 import VA from './pg/VA'
 import Cards from "./Cards.vue"
 import Modal from './pg/ApiSuccessModal'
+import Save from './pg/AddCard'
 import Fund from './pg/FundAccount'
+
 export default {
   name: 'Fintech',
   data(){
@@ -29,9 +32,10 @@ export default {
       AccountAmount,
       Cards,
       Modal,
-      Fund,
+      Save,
       Alert,
-      VA
+      VA,
+      Fund
   },
   async created(){
 
