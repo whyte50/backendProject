@@ -5,7 +5,7 @@
             <p>Save cards using the paystack api.</p>
         </div>
         <div class="cards-container">
-            <div v-if="card">
+            <div v-if="this.state.cardData != null">
                 <div v-for="card in cards" :key="card.id">
                     <FinCard :card="card"/>
                 </div>
