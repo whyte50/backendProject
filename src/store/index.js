@@ -198,6 +198,26 @@ export default createStore({
         state.error = error.response.data.message
       })
 
+    },
+    sendMoney: async ({commit, state}, details) => {
+      await axios({
+        url: 'http://localhost:3000/payapi/send/email',
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin" : "*",
+        },
+        data: {
+          email : details.email,
+          amount : details.amount
+        }
+      })
+
+      .then( (response) => {
+
+        window.open(`${response.data.data.authorization_url}`)
+        state.error = 'Money Successfully Sent'
+      })
     }
   },
   modules: {
