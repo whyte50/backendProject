@@ -212,7 +212,9 @@ export default createStore({
       })
 
     },
-    sendMoney: async ({commit, state}, details) => {
+    sendMoney: async ({commit, state, dispatch}, details) => {
+      dispatch('updateAmount', details.amount);
+
       await axios({
         url: 'https://backend--backendproject.herokuapp.com/payapi/send/email',
         method: 'POST',
@@ -231,6 +233,23 @@ export default createStore({
 
         window.open(`${response.data.data.authorization_url}`)
         state.error = 'Money Successfully Sent'
+      })
+    },
+    updateAmount: async ({commit, state}, data) => {
+      await axios({
+        url: 'https://backend--backendproject.herokuapp.com/update/amount',
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin" : "*",
+        },
+        data: {
+          amount : data.amount,
+          id: state.userDetails.id
+        }
+      })
+      .then((response) => {
+        console.log(response)
       })
     }
   },
