@@ -20,14 +20,20 @@
                                                 <th scope="col" class="col-3">bankID</th>
                                             </tr>
                                         </thead>
-                                        <tbody v-for="ben in benData" :key="ben.id">
-                                            <tr>
-                                                <th scope="row" class="col-3"></th>
-                                                <td class="col-3">{{ ben.accountName }}</td>
-                                                <td class="col-3">{{ ben.accountNumber }}</td>
-                                                <td class="col-3">{{ ben.bankID }}</td>
-                                            </tr>
-                                        </tbody>
+                                        <div v-if="benData[0]">
+                                            <tbody v-for="ben in benData" :key="ben.id">
+                                                <tr>
+                                                    <th scope="row" class="col-3"></th>
+                                                    <td class="col-3">{{ ben.accountName }}</td>
+                                                    <td class="col-3">{{ ben.accountNumber }}</td>
+                                                    <td class="col-3">{{ ben.bankID }}</td>
+                                                </tr>
+                                            </tbody> 
+                                        </div>
+                                        <div v-else>
+                                            <p>Nothing to show here. Start adding Beneficairies</p>
+                                        </div>
+                                        
                                     </table>
                                 </div>
                             </div>

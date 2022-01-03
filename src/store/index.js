@@ -126,7 +126,7 @@ export default createStore({
       try{
         commit('logout');
 
-        sessionStorage.removeItem('token')
+        localStorage.removeItem('token')
         localStorage.removeItem('vuex')
         router.push('/login')
       }catch(err){
