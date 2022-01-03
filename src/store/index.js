@@ -213,7 +213,7 @@ export default createStore({
 
     },
     sendMoney: async ({commit, state, dispatch}, details) => {
-      dispatch('updateAmount', details.amount);
+      dispatch('updateAmount', details);
 
       await axios({
         url: 'https://backend--backendproject.herokuapp.com/payapi/send/email',
