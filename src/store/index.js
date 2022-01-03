@@ -236,6 +236,9 @@ export default createStore({
       })
     },
     updateAmount: async ({commit, state}, data) => {
+
+      const cash = data.amount.slice(0, -2)
+
       await axios({
         url: 'https://backend--backendproject.herokuapp.com/payapi/update/amount',
         method: 'POST',
@@ -244,7 +247,7 @@ export default createStore({
           "Access-Control-Allow-Origin" : "*",
         },
         data: {
-          amount : data.amount.slice(0, -2),
+          amount : cash,
           id: state.userDetails.id
         }
       })
