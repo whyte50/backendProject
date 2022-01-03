@@ -237,7 +237,7 @@ export default createStore({
     },
     updateAmount: async ({commit, state}, data) => {
       await axios({
-        url: 'https://backend--backendproject.herokuapp.com/update/amount',
+        url: 'https://backend--backendproject.herokuapp.com/payapi/update/amount',
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
