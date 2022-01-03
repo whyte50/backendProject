@@ -6,6 +6,7 @@
   <Save id="card"/>
   <VA />
   <Fund />
+  <BenList />
 </template>
 
 <script>
@@ -16,6 +17,7 @@ import jwt from 'jsonwebtoken'
 import AccountAmount from "./pg/AccountAmount.vue"
 import Alert from './pg/Alert'
 import VA from './pg/VA'
+import BenList from './pg/BenList'
 import Cards from "./Cards.vue"
 import Modal from './pg/ApiSuccessModal'
 import Save from './pg/AddCard'
@@ -35,7 +37,8 @@ export default {
       Save,
       Alert,
       VA,
-      Fund
+      Fund,
+      BenList
   },
   async created(){
 
