@@ -53,7 +53,7 @@ export default {
         }
     },
     async created() {
-        const response = await axios.get(`http://localhost:3000/payapi/account/ben_list/${store.state.userDetails.id}`)
+        const response = await axios.get(`https://backend--backendproject.herokuapp.com/payapi/account/ben_list/${store.state.userDetails.id}`)
         console.log(response)
         this.benData = response.data
     }

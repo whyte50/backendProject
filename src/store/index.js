@@ -17,20 +17,21 @@ export default createStore({
     params: {
       acountNumber: null,
       code : null
-    }
+    },
+    benList : false
   },
   mutations: {
     register(state, user){
       state.userDetails = user
+    },
+    logout(state){
+      state.isLoggedIn = false
     },
     addCard(state, card){
       state.cardData = card
     },
     loggedIn(state){
       state.isLoggedIn = true
-    },
-    logout(state){
-      state.isLoggedIn = false
     },
     newCard(state, card){
       state.testData = card
@@ -49,6 +50,12 @@ export default createStore({
     },
     closeModal(state){
       state.modal = false
+    },
+    showBen(state){
+      state.benList = true
+    },
+    closeBen(state){
+      state.benList = false
     },
     addCode(state, payload) {
       state.params.code = payload
