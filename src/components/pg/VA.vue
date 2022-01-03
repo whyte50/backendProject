@@ -5,6 +5,9 @@
             <h1>add</h1>
             <h1>BENEFICAIRY</h1>
             <p>fund your account using the paystack api</p>
+            <span class="submit-btn" style="display: inherit">
+                <button style="width: 200px" @click="this.$store.commit('showBen')">View All Beneficairies</button>
+            </span>
         </div>
     </div>
     <div class="form-container glee set">
