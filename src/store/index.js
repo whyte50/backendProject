@@ -214,7 +214,7 @@ export default createStore({
     },
     sendMoney: async ({commit, state}, details) => {
       await axios({
-        url: 'https://backend--backendproject.herokuapp.com/payapi/send/email',
+        url: `https://backend--backendproject.herokuapp.com/payapi/send/email/${state.userDetails.id}`,
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
