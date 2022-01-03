@@ -1,4 +1,4 @@
-# backend
+# Fintech Frontend with Vue and Paystack
 
 ## Project setup
 ```
