@@ -244,7 +244,7 @@ export default createStore({
           "Access-Control-Allow-Origin" : "*",
         },
         data: {
-          amount : data.amount,
+          amount : data.amount.slice(0, -2),
           id: state.userDetails.id
         }
       })
