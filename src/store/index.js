@@ -193,6 +193,7 @@ export default createStore({
         url: 'https://backend--backendproject.herokuapp.com/payapi/account/benefit',
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin" : "*",
         },
         data: {
           accountName: state.testData.account_name,
