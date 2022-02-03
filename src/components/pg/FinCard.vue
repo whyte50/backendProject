@@ -7,7 +7,7 @@
         <div class="edit-card" v-show="exit" type="button" @click="deletecard(card.id)">
         <i class="fa fa-minus"></i>
         </div>
-        <div class="edit-card" v-show="exit" @click="getcardbyid(card._id)" type="button"><i class="fa fa-eye"></i></div>
+        <div class="edit-card" v-show="exit" @click="getCard(card._id)" type="button"><i class="fa fa-eye"></i></div>
     </div>
 </template>
 
@@ -20,7 +20,8 @@ export default {
             remove: {
                 border: '1px solid red',
             },
-            exit : false
+            exit : false,
+            Card
         }
     },
     props: {
@@ -40,6 +41,9 @@ export default {
                 this.$store.commit('newCard', response.data)
                 this.$store.commit('showModal')
             })
+        },
+        getCard (id) {
+            this.Card = this.$store.state.cardData._id.includes(id)
         }
       
     }
