@@ -35,7 +35,7 @@ export default {
             })
         },
         async getcardbyid (id) {
-            await axios.get(`https://backend--backendproject.herokuapp.com/payapi/card/${id}`)
+            await axios.get(`https://backend--backendproject.herokuapp.com/payapi/cards/${id}`)
             .then((response) => {
                 this.$store.commit('newCard', response.data[0])
                 this.$store.commit('showModal')
